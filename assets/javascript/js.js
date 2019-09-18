@@ -37,15 +37,33 @@ let timer;
 // ==================== Display Q&A's=================================
 
 function displayQuestion() {
+    
+    // looks up questions and possible answers
     var question = questionsArr[currentQuestion].q;
-    console.log(question);
+    console.log(question)
     var choices = questionsArr[currentQuestion].choices;
-    $("#clock").html("time Left: " + counter);
-    $("#game").html(`<h3> ${question} </h3>`);
+    console.log(choices)
 
+    // Displays Q&A's on DOM 
+    $("#clock").html("time Left: " + counter);
+    $("#game").html(`<h3> ${question} </h3>
+        ${displayChoices(choices)}
+    `);
+    
 
 }
 
+// creates buttons for each possible answer
+function displayChoices(choices) {
+    let result = "";
+
+    for (let i = 0; i < choices.length; i++) {
+        result += `<p class="choice" data-answer="${choices[i]}">${choices[i]}</p>`
+    
+    }
+    console.log(result);
+    return result;
+}
 
 
 
