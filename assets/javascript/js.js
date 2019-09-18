@@ -103,6 +103,28 @@ function countDown() {
 }
 
 
+// ======================== Answer Inputs ============================
+
+$("#game").on("click", ".choices", function(){
+    console.log("buttons work")
+    
+    var userguess = $(this).attr('data-answer');
+    console.log(userguess)
+    var rightAnswer = questionsArr[currentQuestion].a;
+
+    console.log(questionsArr[currentQuestion].a);
+    
+    if(userguess == rightAnswer) {
+        score++;
+        console.log("right" + score)
+    } else {
+        lost++;
+        console.log("wrong" + lost++);
+    }
+
+})
+
+
+
 displayQuestion();
 });
-
