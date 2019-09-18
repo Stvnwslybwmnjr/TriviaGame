@@ -37,7 +37,9 @@ let timer;
 // ==================== Display Q&A's=================================
 
 function displayQuestion() {
-    
+    counter = 30;
+    timer = setInterval(countDown, 1000);
+
     // looks up questions and possible answers
     var question = questionsArr[currentQuestion].q;
     console.log(question)
@@ -45,7 +47,7 @@ function displayQuestion() {
     console.log(choices)
 
     // Displays Q&A's on DOM 
-    $("#clock").html("time Left: " + counter);
+    $("#clock").html("Time Left: " + counter);
     $("#game").html(`<h3> ${question} </h3>
         ${displayChoices(choices)}
     `);
@@ -58,13 +60,32 @@ function displayChoices(choices) {
     let result = "";
 
     for (let i = 0; i < choices.length; i++) {
-        result += `<p class="choice" data-answer="${choices[i]}">${choices[i]}</p>`
+        result += `<p class="btn choices" data-answer="${choices[i]}">${choices[i]}</p>`
     
     }
     console.log(result);
     return result;
 }
 
+// ============ Timer ============================
+function timeUp() {
+    clearInterval(timer)
+}
+
+function countDown() {
+    counter--;
+
+    $("#clock").html('Time Left: ' + counter);
+
+    if (counter < 6) {
+        $("#clock").css("color", "red");
+        
+        if (counter == 0) {
+            timeUp();
+    
+        }
+    }
+}
 
 
 displayQuestion();
