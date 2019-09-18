@@ -57,14 +57,14 @@ function displayQuestion() {
 
 // creates buttons for each possible answer
 function displayChoices(choices) {
-    let result = "";
+    let possibleanswer = "";
 
     for (let i = 0; i < choices.length; i++) {
-        result += `<p class="btn choices" data-answer="${choices[i]}">${choices[i]}</p>`
+        possibleanswer += `<p class="btn choices" data-answer="${choices[i]}">${choices[i]}</p>`
     
     }
-    console.log(result);
-    return result;
+    console.log(possibleanswer);
+    return possibleanswer;
 }
 
 function changeQuestion() {
@@ -72,6 +72,7 @@ function changeQuestion() {
     
     if(outOfQuestions){
         alert("Game Over!");
+        displayScore();
         
     } else {
         currentQuestion++;
@@ -126,7 +127,12 @@ $("#game").on("click", ".choices", function(){
 
 })
 
+// =================== Display Score ===========================
 
+function displayScore() {
+   
+    $("#game").html(`<p>You answered ${score} questions out of ${questionsArr.length} correctly</p>`);
+}
 
 displayQuestion();
 });
