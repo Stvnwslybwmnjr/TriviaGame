@@ -28,7 +28,7 @@ let questionsArr = [
 
 // =======================Variables====================================
 
-let counter = 30;
+let counter = 10;
 let currentQuestion = 0;
 let score = 0;
 let lost = 0;
@@ -37,7 +37,7 @@ let timer;
 // ==================== Display Q&A's=================================
 
 function displayQuestion() {
-    counter = 30;
+    counter = 10;
     timer = setInterval(countDown, 1000);
 
     // looks up questions and possible answers
@@ -67,9 +67,23 @@ function displayChoices(choices) {
     return result;
 }
 
+function changeQuestion() {
+   var outOfQuestions = (questionsArr.length - 1) === currentQuestion;
+    
+    if(outOfQuestions){
+        alert("Game Over!");
+        
+    } else {
+        currentQuestion++;
+        displayQuestion();
+    }
+}
+
 // ============ Timer ============================
 function timeUp() {
     clearInterval(timer)
+    
+    lost++;
 }
 
 function countDown() {
@@ -79,9 +93,10 @@ function countDown() {
 
     if (counter < 6) {
         $("#clock").css("color", "red");
-        
+
         if (counter == 0) {
             timeUp();
+            changeQuestion();
     
         }
     }
@@ -90,3 +105,4 @@ function countDown() {
 
 displayQuestion();
 });
+
