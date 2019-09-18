@@ -116,10 +116,12 @@ $("#game").on("click", ".choices", function(){
     
     if(userguess == rightAnswer) {
         score++;
-        console.log("right" + score)
+        console.log("right" + score);
+        changeQuestion();
     } else {
         lost++;
         console.log("wrong" + lost++);
+        changeQuestion();
     }
 
 })
