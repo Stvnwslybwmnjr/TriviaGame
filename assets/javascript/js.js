@@ -45,7 +45,7 @@ $(document).ready(function () {
 
     // =======================Variables====================================
 
-    let counter = 10;
+    let counter = 30;
     let currentQuestion = 0;
     let score = 0;
     let lost = 0;
@@ -54,7 +54,7 @@ $(document).ready(function () {
     // ==================== Display Q&A's=================================
 
     function displayQuestion() {
-        counter = 10;
+        counter = 30;
         timer = setInterval(countDown, 1000);
 
         // looks up questions and possible answers
