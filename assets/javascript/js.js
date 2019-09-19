@@ -109,6 +109,8 @@ function countDown() {
 $("#game").on("click", ".choices", function(){
     console.log("buttons work")
     
+    clearInterval(timer);
+
     var userguess = $(this).attr('data-answer');
     console.log(userguess)
     var rightAnswer = questionsArr[currentQuestion].a;
@@ -130,8 +132,13 @@ $("#game").on("click", ".choices", function(){
 // =================== Display Score ===========================
 
 function displayScore() {
+    
+   var endgame = `
+   <p>You answered ${score} questions out of ${questionsArr.length} correctly</p>
+   <button class="btn btn-primary btn-lg" id="reset">Play Again</button>
+   `
    
-    $("#game").html(`<p>You answered ${score} questions out of ${questionsArr.length} correctly</p>`);
+    $("#game").html(endgame);
 }
 
 displayQuestion();
