@@ -26,6 +26,23 @@ $(document).ready(function () {
 
     ]
 
+    var happygifs = [
+        './assets/images/hooray.gif',
+        './assets/images/mushroomyay.gif',
+        './assets/images/Oprah.gif',
+        './assets/images/yay.gif',
+        './assets/images/correct.gif',
+    ];
+
+    var sadgifs = [
+        './assets/images/cringe.gif',
+        './assets/images/monkeybutt.gif',
+        './assets/images/oopsbear.gif',
+        './assets/images/slapape.gif',
+        './assets/images/wrong.gif',
+
+    ];
+
     // =======================Variables====================================
 
     let counter = 10;
@@ -48,12 +65,22 @@ $(document).ready(function () {
 
         // Displays Q&A's on DOM 
         $("#clock").html("Time Left: " + counter);
-        $("#game").html(`<h3> ${question} </h3>
+        $("#game").html(`
+        <h3> ${question} </h3>
         ${displayChoices(choices)}
-    `);
+        <p>${displayQuestionNumber()}</p>
+    `
+        );
 
 
     }
+    // tracks which question you are on
+    function displayQuestionNumber() {
+
+        return `You are on question ${currentQuestion + 1} of ${questionsArr.length}`
+    }
+
+
 
     // creates buttons for each possible answer
     function displayChoices(choices) {
@@ -80,6 +107,33 @@ $(document).ready(function () {
             currentQuestion++;
             displayQuestion();
         }
+    }
+
+    // ================ Display Gif=======================
+
+    function selectgif(gifs) {
+        var random = Math.floor(Math.random() * gifs.length);
+        var randomGif = gifs[random];
+        return randomGif
+    }
+
+    function displayGif(result) {
+        var correctAnswer = questionsArr[currentQuestion].a;
+
+        if (result === "win") {
+            $("#game").html(`
+            <p class="preload-image">Correct Answer!</p>
+            <img src="${selectgif(happygifs)}"/>
+            `);
+        } else {
+            $("#game").html(`
+            
+            <p class="preload-image">Incorrect Answer!</p>
+            <p class="preload-image">The answer was ${correctAnswer}</p>
+            <img src="${selectgif(sadgifs)}"/>
+        `)
+        }
+
     }
 
     // ============ Timer ============================
@@ -122,11 +176,13 @@ $(document).ready(function () {
         if (userguess == rightAnswer) {
             score++;
             console.log("right" + score);
-            changeQuestion();
+            displayGif('win');
+            setTimeout(changeQuestion, 5 * 1000);
         } else {
             lost++;
             console.log("wrong" + lost++);
-            changeQuestion();
+            displayGif("lose");
+            setTimeout(changeQuestion, 5 * 1000);
         }
 
     })
@@ -151,9 +207,14 @@ $(document).ready(function () {
         currentQuestion = 0;
         score = 0;
         lost = 0;
-        changeQuestion();
+        displayQuestion();
     })
 
+    // ========================= Start Button =======================
 
-    displayQuestion();
+    $('#start').click(function () {
+        $('#start').remove();
+        $('#time').html; (counter);
+        displayQuestion();
+    })
 });
