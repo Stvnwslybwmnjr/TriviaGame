@@ -26,6 +26,8 @@ $(document).ready(function () {
 
     ]
 
+// ================= MEDIA =======================================
+
     var happygifs = [
         './assets/images/hooray.gif',
         './assets/images/mushroomyay.gif',
@@ -42,6 +44,9 @@ $(document).ready(function () {
         './assets/images/wrong.gif',
 
     ];
+
+    let applause = new Audio('./assets/audio/applause.mp3');
+    let foghorn = new Audio('./assets/audio/foghorn.mp3');
 
     // =======================Variables====================================
 
@@ -68,26 +73,21 @@ $(document).ready(function () {
         $("#game").html(`
         <h3> ${question} </h3>
         ${displayChoices(choices)}
-        <p>${displayQuestionNumber()}</p>
+        <p class="mt-3">You are on question ${currentQuestion + 1} of ${questionsArr.length}</p>
     `
         );
 
 
     }
-    // tracks which question you are on
-    function displayQuestionNumber() {
+    
 
-        return `You are on question ${currentQuestion + 1} of ${questionsArr.length}`
-    }
+// =====================ANSWER BUTTONS==============================
 
-
-
-    // creates buttons for each possible answer
     function displayChoices(choices) {
         let possibleanswer = "";
 
         for (let i = 0; i < choices.length; i++) {
-            possibleanswer += `<p class="btn choices" data-answer="${choices[i]}">${choices[i]}</p>`
+            possibleanswer += `<p class="btn choices mt-3" data-answer="${choices[i]}">${choices[i]}</p>`
 
         }
         console.log(possibleanswer);
@@ -100,7 +100,7 @@ $(document).ready(function () {
         $("#clock").css("color", "black");
 
         if (outOfQuestions) {
-            alert("Game Over!");
+            
             displayScore();
 
         } else {
@@ -122,15 +122,15 @@ $(document).ready(function () {
 
         if (result === "win") {
             $("#game").html(`
-            <p class="preload-image">Correct Answer!</p>
-            <img src="${selectgif(happygifs)}"/>
+            <p class="preload-image mt-3">Correct Answer!</p>
+            <img class="gify" src="${selectgif(happygifs)}"/>
             `);
         } else {
             $("#game").html(`
             
-            <p class="preload-image">Incorrect Answer!</p>
-            <p class="preload-image">The answer was ${correctAnswer}</p>
-            <img src="${selectgif(sadgifs)}"/>
+            <p class="preload-image mt-3">Incorrect Answer!</p>
+            <p class="preload-image mt-3">The answer was ${correctAnswer}</p>
+            <img class="gify" src="${selectgif(sadgifs)}"/>
         `)
         }
 
@@ -177,11 +177,13 @@ $(document).ready(function () {
             score++;
             console.log("right" + score);
             displayGif('win');
+            foghorn.play();
             setTimeout(changeQuestion, 5 * 1000);
         } else {
             lost++;
             console.log("wrong" + lost++);
             displayGif("lose");
+            foghorn.play();
             setTimeout(changeQuestion, 5 * 1000);
         }
 
@@ -192,8 +194,8 @@ $(document).ready(function () {
     function displayScore() {
 
         var endgame = `
-   <p>You answered ${score} questions out of ${questionsArr.length} correctly</p>
-   <button class="btn btn-primary btn-lg" id="reset">Play Again</button>
+   <p class="mt-3">You answered ${score} questions out of ${questionsArr.length} correctly</p>
+   <button class="btn start btn-lg mt-3" id="reset">Play Again</button>
    `
 
         $("#game").html(endgame);

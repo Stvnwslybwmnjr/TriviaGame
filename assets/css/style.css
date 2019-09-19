@@ -1,0 +1,28 @@
+body {
+    background-image: url('../images/library.jpg');
+    font-family: 'Rouge Script', cursive;
+    font-size: 40px;
+    color: #000;
+}
+
+.box {
+    background-image: url('../images/ricepaper_v3.png');
+    border-radius: 999em;
+}
+
+.choices {
+    font-size: 40px;
+    border: 2px solid rgb(4, 145, 11);
+  border-radius: 999em; 
+}
+
+.start {
+    background: rgb(4, 145, 11);
+    font-size: 40px;
+
+}
+
+.gify {
+    border-radius: 25px;
+}
+ 
