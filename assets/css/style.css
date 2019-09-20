@@ -15,6 +15,9 @@ body {
     border: 2px solid rgb(4, 145, 11);
   border-radius: 999em; 
 }
+.choices:active {
+    background: rgb(4, 145, 11);
+  }
 
 .start {
     background: rgb(4, 145, 11);
@@ -26,3 +29,6 @@ body {
     border-radius: 25px;
 }
  
+.logo {
+    font-size: 80px;
+}
