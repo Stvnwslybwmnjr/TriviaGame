@@ -53,7 +53,6 @@ $(document).ready(function () {
     let counter = 30;
     let currentQuestion = 0;
     let score = 0;
-    let lost = 0;
     let timer;
 
     // ==================== Display Q&A's=================================
@@ -180,7 +179,6 @@ $(document).ready(function () {
             foghorn.play();
             setTimeout(changeQuestion, 5 * 1000);
         } else {
-            lost++;
             console.log("wrong" + lost++);
             displayGif("lose");
             foghorn.play();
@@ -208,7 +206,6 @@ $(document).ready(function () {
         counter = 10;
         currentQuestion = 0;
         score = 0;
-        lost = 0;
         displayQuestion();
     })
 
